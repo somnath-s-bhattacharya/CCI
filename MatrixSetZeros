@@ -1,0 +1,90 @@
+package com.cci;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Scanner;
+
+/**
+ * Take a matrix from user input and locate zeros
+ * Set entire row and column of the located zero(s) with zeros
+ */
+
+public class MatrixSetZeros {
+	public static int p, q;
+	
+	public static void main(String[] args) 
+	{
+		Scanner s = new Scanner(System.in);
+		System.out.print("Enter number of rows in first matrix:");
+		p = s.nextInt();
+		System.out.print("Enter number of columns in first matrix:");
+		q = s.nextInt();
+		
+		int a[][] = new int[p][q];
+		System.out.println("Enter all the elements of the matrix:");
+		for (int i = 0; i < p; i++) 
+		{
+			for (int j = 0; j < q; j++) 
+			{
+				a[i][j] = s.nextInt();
+			}
+		}
+
+		System.out.println("Input Matrix:");
+		for (int i = 0; i < p; i++) 
+		{
+			for (int j = 0; j < q; j++) 
+			{
+				System.out.print(a[i][j]+" ");
+			}
+			System.out.println("");
+		}
+		searchzeros(a);
+	}
+	
+	public static void searchzeros(int[][] array)
+	{
+		int zerocounter=0;
+		HashMap<Integer, Integer> internalMap = new HashMap<Integer, Integer>();
+		for (int i = 0; i < array.length; i++) 
+		{
+	        for (int j = 0; j < array[i].length; j++) 
+	        {
+	            if (array[i][j] == 0) 
+	            {
+	            	zerocounter++;
+	            	internalMap.put(i, j);
+	            }
+	        }
+	 }
+	 zeroSetter(array, internalMap);
+	}
+
+	public static void zeroSetter(int[][] array, HashMap<Integer, Integer> map)
+	{
+		Iterator<Entry<Integer, Integer>> iterator = map.entrySet().iterator();
+		while (iterator.hasNext()) 
+		{
+			Map.Entry<Integer, Integer> entry = (Map.Entry<Integer, Integer>) iterator.next();
+			int rowindex = entry.getKey();
+			int columnindex = entry.getValue();
+			for(int i=0; i<q;i++)
+			{
+				array[rowindex][i]=0;
+			}
+			for(int i=0; i<p;i++)
+			{
+				array[i][columnindex]=0;
+			}
+		}
+		System.out.println("Output Matrix");
+		for (int[] arr : array) {
+            System.out.println(Arrays.toString(arr));
+        }
+	}
+	
+}
+
