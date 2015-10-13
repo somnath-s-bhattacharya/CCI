@@ -1,0 +1,30 @@
+package com.cci;
+
+import java.util.Scanner;
+
+/**
+ * Replace White Space in a String by Custom Regex "%20" 
+ */
+
+public class ReplaceWhiteSpace {
+
+	public static void main(String[] args) 
+	{
+		System.out.println(replaceSpaceRegex(userInput()));
+	}
+
+	public static String userInput()
+	{
+		System.out.println("Enter a String of your Choice: ");
+		Scanner scanner = new Scanner(System.in);
+		String input = scanner.nextLine();
+		return input;
+	}
+
+	public static String replaceSpaceRegex(String str)
+	{
+		String newStr = str.replaceAll("[\\s]", "%20");
+		return newStr;
+	}
+
+}
